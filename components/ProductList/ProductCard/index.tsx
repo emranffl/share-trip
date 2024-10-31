@@ -1,5 +1,7 @@
+import { AddToCartButton } from "@/components/commons/buttons/AddToCardButton.Client"
 import { WishlistButton } from "@/components/commons/buttons/Wishlist.Client"
 import { Button } from "@/components/ui/button"
+import { CONSTANTS } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import { LINKS } from "@/router.config"
 import { ProductListAPIProps } from "@/services/api/product-list"
@@ -8,7 +10,6 @@ import { EyeIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import truncate from "truncate"
-import { AddToCartButton } from "./AddToCardButton.Client"
 import ribbon from "./ribbon.png"
 
 const ProductCard = ({
@@ -64,7 +65,10 @@ const ProductCard = ({
           <WishlistButton id={id} />
           {/* // + button container */}
           <div className="absolute bottom-0 left-0 grid w-full gap-2 p-2 duration-75 animate-in fade-in hover:transition">
-            <AddToCartButton id={id} className={cn("group-hover:flex", item ? "flex" : "hidden")} />
+            <AddToCartButton
+              product={product}
+              className={cn("group-hover:flex", item ? "flex" : "hidden")}
+            />
             <Button
               variant="outline"
               className="hidden items-center gap-2 text-foreground backdrop-blur-sm group-hover:flex"
@@ -85,10 +89,14 @@ const ProductCard = ({
           {/* <p className="truncate text-gray-600">{description}</p> */}
           <div className="!mt-3 flex items-center">
             <span className="text-xl font-medium text-[#1882FF]">
-              ৳{(price * (1 - discountPercentage / 100)).toFixed(2)}
+              {CONSTANTS.currency}
+              {(price * (1 - discountPercentage / 100)).toFixed(2)}
             </span>
             {isDiscounted && (
-              <span className="ml-2 text-gray-500 line-through">৳{price.toFixed(2)}</span>
+              <span className="ml-2 text-gray-500 line-through">
+                {CONSTANTS.currency}
+                {price.toFixed(2)}
+              </span>
             )}
           </div>
         </div>

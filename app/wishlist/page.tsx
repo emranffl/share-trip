@@ -1,4 +1,4 @@
-import Grid from "../Components/Grid.Client"
+import Grid from "../../components/ProductList/Grid.Client"
 
 export default function Home() {
   return (

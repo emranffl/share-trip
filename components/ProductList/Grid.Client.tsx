@@ -74,7 +74,9 @@ const Grid = ({ isWishlistRoute }: { isWishlistRoute?: true }) => {
 
       {/* // + Card grid */}
       <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-8 xl:grid-cols-4">
-        {data?.products.map((product, i) => <ProductCard key={product.id} product={product} index={i} />)}
+        {data?.products.map((product, i) => (
+          <ProductCard key={product.id} product={product} index={i} />
+        ))}
 
         {/* // + Loading Skeleton */}
         {isLoading && Array.from({ length: 8 }).map((_, i) => <ProductCardSkeleton key={i} />)}

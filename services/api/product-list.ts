@@ -1,4 +1,5 @@
 import { CONSTANTS } from "@/lib/constants"
+import { PATHS } from "@/router.config"
 import { getAPIResponse } from "@/utils/get-api-response"
 import { ProductDetailsAPIProps } from "./product-details"
 
@@ -14,14 +15,9 @@ export const getProductList = async ({
   skip = CONSTANTS.skip,
   sortBy = CONSTANTS.sortBy,
   orderBy = CONSTANTS.orderBy,
-}: {
-  limit: number
-  skip: number
-  sortBy: string
-  orderBy: string
-}) => {
+}: Parameters<typeof PATHS.PRODUCT.LIST>[0]) => {
   const data = await getAPIResponse({
-    apiPath: `/products?limit=${limit}&skip=${skip}&sortBy=${sortBy}&order=${orderBy}`,
+    apiPath: PATHS.PRODUCT.LIST({ limit, skip, sortBy, orderBy }).home,
   })
   return data as ProductListAPIProps
 }

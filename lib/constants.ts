@@ -3,4 +3,5 @@ export const CONSTANTS = {
   skip: 0,
   sortBy: "id",
   orderBy: "desc",
+  currency: "৳",
 } as const

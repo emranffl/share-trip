@@ -1,3 +1,4 @@
+import { PATHS } from "@/router.config"
 import { getAPIResponse } from "@/utils/get-api-response"
 
 export interface ProductDetailsAPIProps {
@@ -46,9 +47,9 @@ interface Meta {
   qrCode: string
 }
 
-export const getProductDetails = async (id: number | string) => {
+export const getProductDetails = async (id: Parameters<typeof PATHS.PRODUCT.DYNAMIC>[0]) => {
   const data = await getAPIResponse({
-    apiPath: `/product/${id}`,
+    apiPath: PATHS.PRODUCT.DYNAMIC(id).home,
   })
   return data as ProductDetailsAPIProps
 }

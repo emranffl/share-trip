@@ -11,10 +11,10 @@ const ProductCardSkeleton = ({ className }: { className?: string }) => {
         <div className="absolute right-2 top-2 size-10 animate-pulse rounded-full bg-slate-200" />
 
         {/* Button container skeleton */}
-        <div className="absolute bottom-0 left-0 w-full space-y-2 p-2">
+        {/* <div className="absolute bottom-0 left-0 w-full space-y-2 p-2">
           <div className="h-10 w-full animate-pulse rounded-md bg-slate-200" />
           <div className="h-10 w-full animate-pulse rounded-md bg-slate-200" />
-        </div>
+        </div> */}
       </div>
 
       {/* Content skeleton */}

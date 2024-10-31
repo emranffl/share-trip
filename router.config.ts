@@ -19,5 +19,26 @@ export const LINKS = {
  * List of all the paths in the app for backend data fetching
  */
 export const PATHS = {
-  PRODUCT: {},
+  PRODUCT: {
+    DYNAMIC: (id: string | number) => {
+      return {
+        home: `/product/${id}`,
+      } as const
+    },
+    LIST: ({
+      limit,
+      skip,
+      sortBy,
+      orderBy,
+    }: {
+      limit: number
+      skip: number
+      sortBy: string
+      orderBy: string
+    }) => {
+      return {
+        home: `/products?limit=${limit}&skip=${skip}&sortBy=${sortBy}&order=${orderBy}`,
+      } as const
+    },
+  },
 } as const

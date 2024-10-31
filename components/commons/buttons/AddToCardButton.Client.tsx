@@ -2,22 +2,24 @@
 
 import { Button, ButtonProps } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { ProductDetailsAPIProps } from "@/services/api/product-details"
 import { useShoppingCartStore } from "@/store/cart"
 import { Minus, Plus, ShoppingCart, Trash2 } from "lucide-react"
 import React from "react"
 
 interface AddToCartButtonProps {
-  id: number | string
+  product: ProductDetailsAPIProps
   className?: string
   variant?: ButtonProps["variant"]
 }
 
-const AddToCartButton: React.FC<AddToCartButtonProps> = ({ id, className, variant }) => {
+const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, className, variant }) => {
+  const { id } = product
   const { cart, addToCart, updateQuantity, removeFromCart } = useShoppingCartStore()
   const item = cart.find((item) => item.id === id)
   const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation()
-    if (!item) addToCart(id)
+    if (!item) addToCart(product)
   }
   const handleRemoveFromCart = (e: React.MouseEvent<SVGSVGElement>) => {
     e.stopPropagation()

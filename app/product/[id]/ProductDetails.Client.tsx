@@ -1,6 +1,6 @@
 "use client"
 
-import { AddToCartButton } from "@/app/Components/ProductCard/AddToCardButton.Client"
+import { AddToCartButton } from "@/components/commons/buttons/AddToCardButton.Client"
 import { WishlistButton } from "@/components/commons/buttons/Wishlist.Client"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -25,30 +25,31 @@ import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 
-const ProductDetails = ({
-  title,
-  availabilityStatus,
-  category,
-  description,
-  dimensions,
-  discountPercentage,
-  id,
-  images,
-  meta,
-  price,
-  minimumOrderQuantity,
-  rating,
-  returnPolicy,
-  reviews,
-  shippingInformation,
-  sku,
-  stock,
-  tags,
-  thumbnail,
-  warrantyInformation,
-  weight,
-  brand,
-}: ProductDetailsAPIProps) => {
+const ProductDetails = ({ product }: { product: ProductDetailsAPIProps }) => {
+  const {
+    title,
+    availabilityStatus,
+    category,
+    description,
+    dimensions,
+    discountPercentage,
+    id,
+    images,
+    meta,
+    price,
+    minimumOrderQuantity,
+    rating,
+    returnPolicy,
+    reviews,
+    shippingInformation,
+    sku,
+    stock,
+    tags,
+    thumbnail,
+    warrantyInformation,
+    weight,
+    brand,
+  } = product
   const [currentImage, setCurrentImage] = useState(0)
   const discountedPrice = price - price * (discountPercentage / 100)
   const averageRating = reviews.reduce((acc, review) => acc + review.rating, 0) / reviews.length
@@ -314,7 +315,7 @@ const ProductDetails = ({
             )}
           >
             <AddToCartButton
-              id={id}
+              product={product}
               className="col-span-full text-background lg:col-span-1"
               variant={"default"}
             />
