@@ -1,0 +1,108 @@
+# + This script is used to check build errors before pushing to the remote repository.
+
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+. "$(dirname -- "$0")/constants"
+. "$(dirname -- "$0")/../.env"
+
+#!/bin/sh
+
+echo "\n\n${BLUE}Running predifined task(s) from${RESET} ${YELLOW}$(basename "$0")${RESET} ${BLUE}hook. Courtesy: ${RESET}\e]8;;https://www.linkedin.com/in/emranffl\e\\@emranffl\e]8;;\e\\n\n"
+
+# + if PACKAGE_MANAGER is not set in .env, set it to pnpm as default
+if [ ! $PACKAGE_MANAGER ]; then
+  PACKAGE_MANAGER="pnpm"
+fi
+
+echo "\n${BLUE}Current PACKAGE_MANAGER:${RESET} ${YELLOW}$PACKAGE_MANAGER${RESET}"
+
+# + if bun is set as the package manager
+if [ "$PACKAGE_MANAGER" = "bun" ]; then
+  # - clean build with bun
+  echo "\n${BLUE}bun run clean-build-rb${RESET}"
+
+  # run clean-build-rb
+  bun run clean-build-rb || {
+    # * task fail block
+
+    echo "\n${BOLD_RED}clean-build-rb${RESET} ${RED}failed. Git push aborted, fix the specified error and try again.${RESET}\n"
+
+    # check if command ran from git source control in vscode
+    if ! [ -t 1 ]; then
+      # show error text in an alert box on Linux 
+      if command -v zenity &> /dev/null; then
+        zenity --error --text="'clean-build-rb' failed. Git push aborted, fix the errors and try again."
+      fi
+
+      # show error text in an alert box on macOS
+      if command -v osascript &> /dev/null; then
+        osascript -e 'display alert "clean-build-rb failed" message "Git push aborted, fix the errors and try again." as warning'
+      fi
+    fi
+
+    exit 1
+  }
+
+  exit 0
+fi
+
+# + if yarn is set as the package manager
+if [ "$PACKAGE_MANAGER" = "yarn" ]; then
+  # - clean build with yarn
+  echo "\n${BLUE}yarn run clean-build-pmy${RESET}"
+
+  # run clean-build-pmy
+  yarn run clean-build-pmy || {
+    # * task fail block
+
+    echo "\n${BOLD_RED}clean-build-pmy${RESET} ${RED}failed. Git push aborted, fix the specified error and try again.${RESET}\n"
+
+    # check if command ran from git source control in vscode
+    if ! [ -t 1 ]; then
+      # show error text in an alert box on Linux 
+      if command -v zenity &> /dev/null; then
+        zenity --error --text="'clean-build-pmy' failed. Git push aborted, fix the errors and try again."
+      fi
+
+      # show error text in an alert box on macOS
+      if command -v osascript &> /dev/null; then
+        osascript -e 'display alert "clean-build-pmy failed" message "Git push aborted, fix the errors and try again." as warning'
+      fi
+    fi
+
+    exit 1
+  }
+
+  exit 0
+fi
+
+# + if pnpm is set as the package manager
+if [ "$PACKAGE_MANAGER" = "pnpm" ]; then
+  # - clean build with pnpm
+  echo "\n${BLUE}pnpm run clean-build${RESET}"
+
+  # run clean-build
+  pnpm run clean-build || {
+    # + task fail block
+
+    echo "\n${BOLD_RED}clean-build${RESET} ${RED}failed. Git push aborted, fix the specified error and try again.${RESET}\n"
+    echo "\n\n${GREEN}Courtesy: https://www.linkedin.com/in/emranffl${RESET}\n\n"
+
+    # check if command ran from git source control in vscode
+    if ! [ -t 1 ]; then
+      # show error text in an alert box on Linux 
+      if command -v zenity &> /dev/null; then
+        zenity --error --text="'clean-build' failed. Git push aborted, fix the errors and try again."
+      fi
+
+      # show error text in an alert box on macOS
+      if command -v osascript &> /dev/null; then
+        osascript -e 'display alert "clean-build failed" message "Git push aborted, fix the errors and try again." as warning'
+      fi
+    fi
+
+    exit 1
+  }
+
+  exit 0
+fi
