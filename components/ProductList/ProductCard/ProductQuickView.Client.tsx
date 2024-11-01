@@ -74,7 +74,11 @@ const ProductQuickView = ({
                 )}
               </div>
               <div className="flex gap-2">
-                <AddToCartButton product={product} className="w-full" variant={"default"} />
+                <AddToCartButton
+                  product={product}
+                  className="w-full text-background"
+                  variant={"default"}
+                />
               </div>
             </div>
           </div>
