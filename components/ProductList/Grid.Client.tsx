@@ -11,10 +11,12 @@ import { useUserPreferencesStore } from "@/store/preferences"
 import { useWishlistStore } from "@/store/wishlist"
 import { useQuery } from "@tanstack/react-query"
 import { isEmpty } from "lodash"
+import { SortAsc, SortDesc } from "lucide-react"
 import { useEffect } from "react"
 import EmptyRecordsCard from "../Card/EmptyRecordsCard"
 import ErrorCard from "../Card/ErrorCard"
 import PageHeader from "../commons/PageHeader"
+import { Button } from "../ui/button"
 import { CategoryFilter } from "./CategoryFilter.Client"
 import DebouncedSearchInput from "./DebounceInput.Client"
 import { Pagination } from "./Pagination.Client"
@@ -127,6 +129,17 @@ const Grid = ({ isWishlistRoute }: { isWishlistRoute?: true }) => {
           <div className="flex items-center justify-end gap-2">
             <DebouncedSearchInput value={searchText} onChange={handleInput} />
             <CategoryFilter onSelect={handleInput} selectedItem={category} />
+            <Button
+              variant="outline"
+              className="flex items-center p-2"
+              onClick={() => setOrderBy(orderBy === "asc" ? "desc" : "asc")}
+            >
+              {orderBy === "asc" ? (
+                <SortAsc className="size-4 text-gray-700" />
+              ) : (
+                <SortDesc className="size-4 text-gray-700" />
+              )}
+            </Button>
           </div>
         )}
       </div>

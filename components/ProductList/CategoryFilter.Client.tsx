@@ -12,7 +12,8 @@ import { QUERY } from "@/query.config"
 import { getCategoryList } from "@/services/api/category/category-list"
 import { useQuery } from "@tanstack/react-query"
 import { replace, startCase } from "lodash"
-import { Filter } from "lucide-react"
+import { Filter, X } from "lucide-react"
+import truncate from "truncate"
 
 const CategoryFilter = ({
   onSelect,
@@ -31,16 +32,25 @@ const CategoryFilter = ({
       <DropdownMenuTrigger asChild>
         <Button variant="outline" className="flex items-center p-2">
           {selectedItem?.length > 0 ? (
-            <span className="flex items-center">
-              <small className="mr-1 tracking-wide">
-                {selectedItem.length > 15 ? selectedItem.slice(0, 15) + "..." : selectedItem}
-              </small>
-            </span>
+            <small className="tracking-wide">
+              {truncate(startCase(replace(selectedItem, /-/g, " ")), 15)}
+            </small>
           ) : (
             <Filter className="size-4 text-gray-700" />
           )}
         </Button>
       </DropdownMenuTrigger>
+      {selectedItem?.length > 0 && (
+        <Button
+          variant="outline"
+          className="flex items-center p-2"
+          onClick={() => onSelect("", "category")}
+        >
+          <X className="size-4 text-gray-700" />
+        </Button>
+      )}
+
+      {/* // + DD content */}
       <DropdownMenuContent sideOffset={6} className="mr-4 max-h-80 overflow-y-auto xl:mr-20">
         {data?.map((item) => (
           <DropdownMenuItem
