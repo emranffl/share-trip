@@ -31,13 +31,13 @@ const DebouncedSearchInput = ({
   }, [localValue, value, onChange, delay])
 
   return (
-    <div className="relative w-72">
+    <div className="relative w-full sm:w-72">
       <Input
         type="search"
         placeholder={placeholder}
         value={localValue}
         onChange={(e) => setLocalValue(e.target.value)}
-        className="relative w-full max-w-sm"
+        className="relative w-full sm:max-w-sm"
       />
       <X
         className={cn(

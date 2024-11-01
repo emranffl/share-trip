@@ -101,18 +101,20 @@ const Grid = ({ isWishlistRoute }: { isWishlistRoute?: true }) => {
     }
   }, [isWishlistRoute, setCategory, setLimit, setOrderBy, setSearchText, setSkip, setSortBy])
 
-  // + Error handling
-  if (isProductsError) {
-    return <ErrorCard />
-  }
-
+  // *
   const data = isWishlistRoute ? { products: wishlist } : productsByCategory || products
   const isLoading = isProductsByCategoryLoading || isProductsLoading
+  const isError = isProductsByCategoryError || isProductsError
+
+  // + Error handling
+  if (isError) {
+    return <ErrorCard />
+  }
 
   return (
     <>
       {/* // + Search & filter */}
-      <div className="sticky top-10 z-20 grid gap-5 bg-background py-5 bx-container xl:top-16">
+      <div className="sticky top-10 z-20 grid gap-5 bg-background py-5 bx-container sm:grid-cols-2 xl:top-16">
         <PageHeader
           title={isWishlistRoute ? "Wishlist" : "Products"}
           paragraph={
