@@ -7,6 +7,7 @@ import {
   getProductListByCategory,
   type ProductListByCategoryAPIProps,
 } from "@/services/api/product/product-list-by-category"
+import { getProductSearchList } from "@/services/api/product/product-search-list"
 import { useUserPreferencesStore } from "@/store/preferences"
 import { useWishlistStore } from "@/store/wishlist"
 import { useQuery } from "@tanstack/react-query"
@@ -86,6 +87,24 @@ const Grid = ({ isWishlistRoute }: { isWishlistRoute?: true }) => {
     enabled: !!category,
   })
 
+  // * Fetch product list by search text
+  const {
+    data: productsBySearch,
+    isLoading: isProductsBySearchLoading,
+    isError: isProductsBySearchError,
+  } = useQuery({
+    queryKey: [
+      QUERY.PRODUCT.LIST({
+        limit,
+        skip,
+        sortBy,
+        orderBy,
+      }).SEARCH(searchText).home,
+    ],
+    queryFn: async () => await getProductSearchList({ limit, skip, sortBy, orderBy, searchText }),
+    enabled: !!searchText,
+  })
+
   // * Set Zustand state when component mounts
   useEffect(() => {
     // * Set page number to 1 when not on wishlist route
@@ -104,9 +123,11 @@ const Grid = ({ isWishlistRoute }: { isWishlistRoute?: true }) => {
   }, [isWishlistRoute, setCategory, setLimit, setOrderBy, setSearchText, setSkip, setSortBy])
 
   // *
-  const data = isWishlistRoute ? { products: wishlist } : productsByCategory || products
-  const isLoading = isProductsByCategoryLoading || isProductsLoading
-  const isError = isProductsByCategoryError || isProductsError
+  const data = isWishlistRoute
+    ? { products: wishlist }
+    : productsByCategory || productsBySearch || products
+  const isLoading = isProductsByCategoryLoading || isProductsBySearchLoading || isProductsLoading
+  const isError = isProductsByCategoryError || isProductsBySearchError || isProductsError
 
   // + Error handling
   if (isError) {

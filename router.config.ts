@@ -48,7 +48,12 @@ export const PATHS = {
         BY_CATEGORY: (category: string) => {
           return {
             key: `/products/category/${category}?limit=${limit}&skip=${skip}&sortBy=${sortBy}&order=${orderBy}` as const,
-          }
+          } as const
+        },
+        SEARCH: (searchText: string) => {
+          return {
+            home: `/products/search?q=${searchText}&limit=${limit}&skip=${skip}&sortBy=${sortBy}&order=${orderBy}`,
+          } as const
         },
       } as const
     },

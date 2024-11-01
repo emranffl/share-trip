@@ -18,6 +18,11 @@ export const QUERY = {
             key: `/products/category/${category}?limit=${limit}&skip=${skip}&sortBy=${sortBy}&order=${orderBy}` as const,
           }
         },
+        SEARCH: (searchText: string) => {
+          return {
+            home: `/products/search?limit=${limit}&skip=${skip}&sortBy=${sortBy}&order=${orderBy}&searchText=${searchText}`,
+          } as const
+        },
       }
     },
     DYNAMIC: (slug: string) => {

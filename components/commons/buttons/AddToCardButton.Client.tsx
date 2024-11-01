@@ -53,7 +53,12 @@ const AddToCartButton: React.FC<AddToCartButtonProps> = ({ product, className, v
     <Button
       onClick={handleAddToCart}
       variant={variant ?? (item ? "secondary" : "outline")}
-      className={cn("flex items-center gap-2 text-foreground backdrop-blur-sm", className)}
+      className={cn(
+        "flex items-center gap-2 text-foreground backdrop-blur-sm",
+        item?.quantity && "bg-green-500 text-background hover:text-foreground",
+        variant === "default" && "hover:text-background",
+        className,
+      )}
     >
       {item ? (
         item.quantity === 1 ? (

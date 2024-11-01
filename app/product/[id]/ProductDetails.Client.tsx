@@ -2,6 +2,7 @@
 
 import { AddToCartButton } from "@/components/commons/buttons/AddToCardButton.Client"
 import { WishlistButton } from "@/components/commons/buttons/Wishlist.Client"
+import { ImageGallery } from "@/components/commons/ImageGallery.Client"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -21,7 +22,6 @@ import {
   TagIcon,
   Truck,
 } from "lucide-react"
-import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -66,37 +66,7 @@ const ProductDetails = ({ product }: { product: ProductDetailsAPIProps }) => {
         <div className="space-y-4">
           <Card>
             <CardContent className="p-4">
-              <div className="relative aspect-square overflow-hidden rounded-lg">
-                <Image
-                  src={images[currentImage]}
-                  alt={title}
-                  className="h-full w-full object-cover"
-                  height={450}
-                  width={450}
-                />
-              </div>
-              <div className="mt-4 flex gap-2 overflow-x-auto p-1">
-                {images.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentImage(index)}
-                    className={cn(
-                      "relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-md",
-                      currentImage === index
-                        ? "ring-2 ring-blue-500"
-                        : "opacity-70 hover:opacity-100",
-                    )}
-                  >
-                    <Image
-                      src={image}
-                      alt={`Product view ${index + 1}`}
-                      className="h-full w-full object-cover"
-                      height={80}
-                      width={80}
-                    />
-                  </button>
-                ))}
-              </div>
+              <ImageGallery images={images} title={title} />
             </CardContent>
           </Card>
 
