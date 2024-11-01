@@ -2,7 +2,7 @@
 
 import { Button, ButtonProps } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { ProductDetailsAPIProps } from "@/services/api/product-details"
+import { ProductDetailsAPIProps } from "@/services/api/product/product-details"
 import { useShoppingCartStore } from "@/store/cart"
 import { Minus, Plus, ShoppingCart, Trash2 } from "lucide-react"
 import React from "react"

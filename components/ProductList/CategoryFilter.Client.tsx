@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
@@ -6,17 +8,24 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { QUERY } from "@/query.config"
+import { getCategoryList } from "@/services/api/category/category-list"
+import { useQuery } from "@tanstack/react-query"
+import { replace, startCase } from "lodash"
 import { Filter } from "lucide-react"
 
-const TopicFilter = ({
-  bookshelves,
+const CategoryFilter = ({
   onSelect,
   selectedItem,
 }: {
-  bookshelves: string[]
-  onSelect: (shelf: string, type: "topic") => void
+  onSelect: (shelf: string, type: "category") => void
   selectedItem: string
 }) => {
+  const { data } = useQuery({
+    queryKey: [QUERY.CATEGORY.LIST().key],
+    queryFn: getCategoryList,
+  })
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -33,19 +42,19 @@ const TopicFilter = ({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent sideOffset={6} className="mr-4 max-h-80 overflow-y-auto xl:mr-20">
-        {bookshelves.map((shelf) => (
+        {data?.map((item) => (
           <DropdownMenuItem
-            key={shelf}
+            key={item}
             onClick={() => {
-              if (selectedItem === shelf) {
-                onSelect("", "topic")
+              if (selectedItem === item) {
+                onSelect("", "category")
                 return
               }
-              onSelect(shelf, "topic")
+              onSelect(item, "category")
             }}
           >
-            <DropdownMenuCheckboxItem checked={selectedItem === shelf}>
-              {shelf}
+            <DropdownMenuCheckboxItem checked={selectedItem === item}>
+              {startCase(replace(item, /-/g, " "))}
             </DropdownMenuCheckboxItem>
           </DropdownMenuItem>
         ))}
@@ -54,4 +63,4 @@ const TopicFilter = ({
   )
 }
 
-export default TopicFilter
+export { CategoryFilter }

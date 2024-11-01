@@ -1,4 +1,4 @@
-import { ProductDetailsAPIProps } from "@/services/api/product-details"
+import { ProductDetailsAPIProps } from "@/services/api/product/product-details"
 import { create } from "zustand"
 import { createJSONStorage, persist } from "zustand/middleware"
 

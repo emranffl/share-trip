@@ -8,7 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
-import { ProductDetailsAPIProps } from "@/services/api/product-details"
+import { ProductDetailsAPIProps } from "@/services/api/product/product-details"
 import { replace, startCase } from "lodash"
 import {
   BarChart,

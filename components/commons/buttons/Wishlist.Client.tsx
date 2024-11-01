@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { ProductDetailsAPIProps } from "@/services/api/product-details"
+import { ProductDetailsAPIProps } from "@/services/api/product/product-details"
 import { useWishlistStore } from "@/store/wishlist"
 import { Heart } from "lucide-react"
 

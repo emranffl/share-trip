@@ -1,5 +1,5 @@
 import { QUERY } from "@/query.config"
-import { getProductDetails } from "@/services/api/product-details"
+import { getProductDetails } from "@/services/api/product/product-details"
 import { QueryClient } from "@tanstack/react-query"
 import { ProductDetails } from "./ProductDetails.Client"
 
