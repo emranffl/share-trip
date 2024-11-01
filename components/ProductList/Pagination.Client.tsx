@@ -60,7 +60,11 @@ const Pagination: React.FC<LimitPaginationProps> = ({
           <small className="font-medium text-slate-500">
             {skip + 1} - {Math.min(skip + limit, totalCount)} / {totalCount}
           </small>
-          <Select value={limit.toString()} onValueChange={handleLimitChange} disabled={isLoading}>
+          <Select
+            value={limit.toString()}
+            onValueChange={handleLimitChange}
+            disabled={isLoading || totalCount < CONSTANTS.limit}
+          >
             <SelectTrigger className="w-16 border-none shadow-none focus:ring-0">
               <SelectValue />
             </SelectTrigger>

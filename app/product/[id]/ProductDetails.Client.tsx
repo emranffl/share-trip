@@ -33,11 +33,9 @@ const ProductDetails = ({ product }: { product: ProductDetailsAPIProps }) => {
     description,
     dimensions,
     discountPercentage,
-    id,
     images,
     meta,
     price,
-    minimumOrderQuantity,
     rating,
     returnPolicy,
     reviews,
@@ -45,7 +43,6 @@ const ProductDetails = ({ product }: { product: ProductDetailsAPIProps }) => {
     sku,
     stock,
     tags,
-    thumbnail,
     warrantyInformation,
     weight,
     brand,
@@ -173,7 +170,7 @@ const ProductDetails = ({ product }: { product: ProductDetailsAPIProps }) => {
                               key={i}
                               className={cn(
                                 "h-5 w-5",
-                                i < Math.round(averageRating)
+                                i < Math.round(rating) || i < Math.round(averageRating)
                                   ? "fill-yellow-400 text-yellow-400"
                                   : "text-gray-300",
                               )}

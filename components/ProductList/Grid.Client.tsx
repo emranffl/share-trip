@@ -114,7 +114,7 @@ const Grid = ({ isWishlistRoute }: { isWishlistRoute?: true }) => {
   return (
     <>
       {/* // + Search & filter */}
-      <div className="sticky top-10 z-20 grid gap-5 bg-background py-5 bx-container sm:grid-cols-2 xl:top-16">
+      <div className="sticky top-14 z-20 grid gap-5 bg-background py-5 bx-container sm:grid-cols-2 xl:top-16">
         <PageHeader
           title={isWishlistRoute ? "Wishlist" : "Products"}
           paragraph={
@@ -148,8 +148,8 @@ const Grid = ({ isWishlistRoute }: { isWishlistRoute?: true }) => {
         {!isWishlistRoute && data && (
           <Pagination
             isLoading={isLoading}
-            limit={(data as ProductListAPIProps | ProductListByCategoryAPIProps).limit}
-            skip={(data as ProductListAPIProps | ProductListByCategoryAPIProps).skip}
+            limit={limit}
+            skip={skip}
             totalCount={(data as ProductListAPIProps | ProductListByCategoryAPIProps).total}
             setLimit={setLimit}
             setSkip={setSkip}

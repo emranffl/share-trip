@@ -11,9 +11,23 @@ const murechoSans = localFont({
   weight: "100 900",
 })
 
+const TITLE = {
+  /**
+   * `title.template` can be used to add a prefix or a suffix
+   * to title's defined in child route segments
+   */
+  template: `%s • Dummy JSON`,
+  /**
+   * `title.default` can be used to provide a fallback title
+   * to child route segments that don't define a title
+   */
+  default: `Dummy JSON`,
+}
+
 export const metadata: Metadata = {
-  title: "Share Trip",
-  description: "Share Trip is a social media platform for sharing your travel experiences.",
+  title: TITLE,
+  description: "Dummy JSON is a free and open-source API for generating random data.",
+  robots: "noindex, nofollow",
 }
 
 export default function RootLayout({
