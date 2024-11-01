@@ -62,7 +62,7 @@ const ProductCard = ({
             priority={index < 6}
           />
           {/* // + wishlist button */}
-          <WishlistButton id={id} />
+          <WishlistButton product={product} />
           {/* // + button container */}
           <div className="absolute bottom-0 left-0 grid w-full gap-2 p-2 duration-75 animate-in fade-in hover:transition">
             <AddToCartButton

@@ -137,7 +137,7 @@ const ProductDetails = ({ product }: { product: ProductDetailsAPIProps }) => {
                   <CardTitle className="text-3xl font-bold">{title}</CardTitle>
                   {brand && <p className="text-sm text-muted-foreground">by {brand}</p>}
                 </div>
-                <WishlistButton id={id} className="static" />
+                <WishlistButton product={product} className="static" />
               </div>
             </CardHeader>
             <CardContent>
