@@ -1,15 +1,14 @@
 import { AddToCartButton } from "@/components/commons/buttons/AddToCardButton.Client"
 import { WishlistButton } from "@/components/commons/buttons/Wishlist.Client"
-import { Button } from "@/components/ui/button"
 import { CONSTANTS } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import { LINKS } from "@/router.config"
 import { ProductListAPIProps } from "@/services/api/product/product-list"
 import { useShoppingCartStore } from "@/store/cart"
-import { EyeIcon } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import truncate from "truncate"
+import { ProductQuickView } from "./ProductQuickView.Client"
 import ribbon from "./ribbon.png"
 
 const ProductCard = ({
@@ -69,13 +68,12 @@ const ProductCard = ({
               product={product}
               className={cn("group-hover:flex", item ? "flex" : "hidden")}
             />
-            <Button
-              variant="outline"
-              className="hidden items-center gap-2 text-foreground backdrop-blur-sm group-hover:flex"
-            >
-              <EyeIcon className="" strokeWidth={1.5} />
-              <span>Quick View</span>
-            </Button>
+            <ProductQuickView
+              actualPrice={actualPrice}
+              discountedPrice={discountedPrice}
+              isDiscounted={isDiscounted}
+              product={product}
+            />
           </div>
         </div>
 
